@@ -11,12 +11,14 @@ import {
 import RootLayout from "./layouts/RootLayout";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/sign-up" element={<SignUp />} />
     </Route>
   )
 );

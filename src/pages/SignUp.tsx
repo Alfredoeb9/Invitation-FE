@@ -69,7 +69,7 @@ export default function SignUp() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="max-w-md m-auto py-5"
+        className="max-w-md w-full m-auto py-5"
       >
         <h1 className="font-bold text-4xl mb-4">Sign up</h1>
 
