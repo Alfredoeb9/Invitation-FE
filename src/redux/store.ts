@@ -13,6 +13,8 @@ import storage from "redux-persist/lib/storage";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import userSlice from "./features/userSlice";
 import { userApi } from "./api/userAPI";
+import { invitationsApi } from "./api/invitationAPI";
+import invitationSlice from "./features/invitationSlice";
 
 const persistAuthConfig = {
   key: "root",
@@ -21,7 +23,12 @@ const persistAuthConfig = {
   // blacklist: [invitationsApi.reducerPath, invitationSlice.reducerPath],
 };
 
-const rootReducer = combineSlices(userSlice, userApi);
+const rootReducer = combineSlices(
+  userSlice,
+  invitationSlice,
+  userApi,
+  invitationsApi
+);
 
 const appReducer = (state: any, action: any) => {
   if (action.type === "RESET") {
@@ -43,7 +50,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }).concat(userApi.middleware),
+      }).concat(userApi.middleware, invitationsApi.middleware),
   });
   // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
   // see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
