@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8000",
   "dependencies": {
     "@reduxjs/toolkit": "2.2.5",
     "@testing-library/jest-dom": "6.4.5",
@@ -25,10 +26,9 @@
     "zod": "3.23.8"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "webpack-cli serve --config webpack/webpack.dev.js",
+    "build": "webpack --config webpack/webpack.prod.js",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": [
