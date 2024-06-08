@@ -12,10 +12,15 @@ import RootLayout from "./layouts/RootLayout";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import PrivateRoutes from "./components/PrivateRoutes";
+import VerifyEmail from "./pages/VerifyEmail/VerifyEmail";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
+      <Route element={<PrivateRoutes />}></Route>
+
+      <Route path="/verify-email/:id" element={<VerifyEmail />} />
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/login" element={<Login />} />
       <Route path="/sign-up" element={<SignUp />} />
