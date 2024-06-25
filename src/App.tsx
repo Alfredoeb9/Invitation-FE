@@ -14,11 +14,14 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import PrivateRoutes from "./components/PrivateRoutes";
 import VerifyEmail from "./pages/VerifyEmail/VerifyEmail";
+import Home from "./pages/Home";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route element={<PrivateRoutes />}></Route>
+      <Route element={<PrivateRoutes />}>
+        <Route index element={<Home />} />
+      </Route>
 
       <Route path="/verify-email/:id" element={<VerifyEmail />} />
       <Route path="/welcome" element={<Welcome />} />
