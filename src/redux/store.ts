@@ -20,7 +20,7 @@ const persistAuthConfig = {
   key: "root",
   version: 1,
   storage,
-  // blacklist: [invitationsApi.reducerPath, invitationSlice.reducerPath],
+  blacklist: [invitationsApi.reducerPath, invitationSlice.reducerPath],
 };
 
 const rootReducer = combineSlices(

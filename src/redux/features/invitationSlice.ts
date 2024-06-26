@@ -26,8 +26,6 @@ export const invitationSlice = createSlice({
   initialState,
   reducers: {
     populateInvitation: (state, action: PayloadAction<any>) => {
-      //   console.log("action", action.payload.length);
-
       action.payload.forEach((element: InvitationStateTypes) => {
         state.invitations = [
           ...state.invitations,
@@ -43,36 +41,6 @@ export const invitationSlice = createSlice({
           },
         ];
       });
-      //   for (let i = 0; i < action.payload; i++) {
-      //     console.log("action", action.payload[i]);
-      //   state.invitations = [
-      //     ...state.invitations,
-      //     {
-      //       content: action.payload[i].content,
-      //       createdBy: action.payload[i].createdBy,
-      //       createdById: action.payload[i].createdById,
-      //       description: action.payload[i].description,
-      //       id: action.payload[i].id,
-      //       name: action.payload[i].name,
-      //       published: action.payload[i].published,
-      //       sharedURL: action.payload[i].sharedURL,
-      //     },
-      //   ];
-      //   }
-
-      //   state.invitations = [
-      //     ...state.invitations,
-      //     {
-      //       content: action.payload.content,
-      //       createdBy: "erwser",
-      //       createdById: action.payload[1].createdById,
-      //       description: action.payload.description,
-      //       id: action.payload.id,
-      //       name: action.payload.name,
-      //       published: action.payload.published,
-      //       sharedURL: action.payload.sharedURL,
-      //     },
-      //   ];
     },
     addInvitations: (state, action: PayloadAction<any>) => {
       state.invitations = [
@@ -90,7 +58,6 @@ export const invitationSlice = createSlice({
       ];
     },
     removeInvitation: (state, action: PayloadAction<any>) => {
-      console.log("action", action.payload);
       state.invitations = state.invitations.filter(
         (inv) => inv.id !== action.payload
       );
