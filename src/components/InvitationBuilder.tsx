@@ -6,6 +6,8 @@ import { Image } from "lucide-react";
 import { Grid3X3 } from "lucide-react";
 import { Type } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
+import MyImages from "./tools/MyImages";
+import BackgroundTool from "./tools/BackgroundTool";
 
 export default function InvitationBuilder() {
   const [state, setState] = useState("");
@@ -61,9 +63,37 @@ export default function InvitationBuilder() {
             </div>
 
             {state.length > 0 && (
-              <div>
-                {show.name.charAt(0).toUpperCase() + show.name.slice(1)}
-              </div>
+              <>
+                <div>
+                  {show.name.charAt(0).toUpperCase() + show.name.slice(1)}
+                </div>
+
+                {show.name.toLowerCase() === "shapes" && (
+                  <div className="grid grid-cols-3 gap-2">
+                    {" "}
+                    <div className="h-[90px] bg-[#3c3c3d] cursor-pointer"></div>{" "}
+                    <div className="h-[90px] bg-[#3c3c3d] cursor-pointer rounded-full"></div>
+                    <div
+                      style={{ clipPath: "polygon(50% 0, 100% 100%, 0 100%)" }}
+                      className="h-[90px] bg-[#3c3c3d] cursor-pointer"
+                    ></div>
+                  </div>
+                )}
+
+                {show.name.toLowerCase() === "images" && <MyImages />}
+
+                {show.name.toLowerCase() === "text" && (
+                  <div>
+                    <div className="grid grid-cols-1 gap-2">
+                      <div className="bg-[#3c3c3d] cursor-pointer font-bold p-3 text-white text-xl rounded-sm">
+                        <h2>Add a Text</h2>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {show.name.toLowerCase() === "background" && <BackgroundTool />}
+              </>
             )}
           </div>
         </div>
