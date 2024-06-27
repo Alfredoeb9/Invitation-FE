@@ -3,4 +3,6 @@ declare module "*.svg" {
   export default content;
 }
 
+declare module "*.png";
+
 declare module "redux-persist/lib/storage";

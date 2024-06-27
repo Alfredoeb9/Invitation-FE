@@ -33,6 +33,7 @@ export default function InvitationBuilder() {
   const [state, setState] = useState<HTMLElement | any | undefined>(undefined);
   const [currentComponent, setCurrentComponent] = useState<any>(undefined);
   const [color, setColor] = useState<string>("");
+  const [image, setImage] = useState<string>("");
   const [components, setComponents] = useState<InfoTypes[]>([
     {
       name: "main_frame",
@@ -80,18 +81,42 @@ export default function InvitationBuilder() {
   const removeComponent = () => {
     const com = components.find((c) => c.id === currentComponent.id);
     const temp = components.filter((c) => c.id !== currentComponent.id);
+  };
 
-    // com.image = "";
-    // setImage("");
-    // setComponents([...temp, com]);
+  const removeBackground = () => {
+    const comp = components.find((comp) => comp.id === currentComponent?.id);
+    const temp = components.filter((comp) => comp.id !== currentComponent.id);
+
+    if (comp === undefined) {
+      return;
+    }
+
+    comp.image = "";
+    setImage("");
+    setComponents([...temp, comp]);
+  };
+
+  const createShape = (name: string, type: string) => {
+    console.log("yes we created it");
+    const style = {
+      id: components.length + 1,
+    };
   };
 
   useEffect(() => {
     if (currentComponent) {
       const index = components.findIndex((c) => c.id === currentComponent.id);
+      const temp = components.filter((comp) => comp.id !== currentComponent.id);
+
+      if (currentComponent.name === "main_frame" && image) {
+        components[index].image = image || currentComponent.image;
+      }
       components[index].color = color || currentComponent.color;
+
+      setComponents([...temp, components[index]]);
+      setShow({ name: "", status: true });
     }
-  }, [color]);
+  }, [color, image]);
 
   return (
     <div>
@@ -138,13 +163,17 @@ export default function InvitationBuilder() {
                   {show.name.charAt(0).toUpperCase() + show.name.slice(1)}
                 </h3>
 
-                {show.name.toLowerCase() === "shapes" && <ShapeTool />}
+                {show.name.toLowerCase() === "shapes" && (
+                  <ShapeTool createShape={createShape} />
+                )}
 
                 {show.name.toLowerCase() === "images" && <MyImages />}
 
                 {show.name.toLowerCase() === "text" && <TextTool />}
 
-                {show.name.toLowerCase() === "background" && <BackgroundTool />}
+                {show.name.toLowerCase() === "background" && (
+                  <BackgroundTool setImage={setImage} />
+                )}
 
                 {show.name.toLowerCase() === "upload" && <UploadTool />}
               </>
@@ -199,6 +228,24 @@ export default function InvitationBuilder() {
                       className="invisible"
                       id="color"
                     />
+                  </div>
+
+                  {currentComponent.name === "main_frame" && image && (
+                    <div className="transition-all">
+                      <button
+                        className="p-[6px] bg-slate-700 text-white rounded-md transition-all"
+                        onClick={removeBackground}
+                      >
+                        Remove Background
+                      </button>
+                    </div>
+                  )}
+
+                  <div
+                    className="bg-white px-2 py-1 text-black rounded-sm cursor-pointer hover:bg-slate-50 transition-all"
+                    onClick={() => setColor("")}
+                  >
+                    Reset
                   </div>
                 </div>
               </div>
