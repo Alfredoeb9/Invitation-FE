@@ -21,7 +21,7 @@ interface InfoTypes {
   width: number;
   z_index: number;
   color: string;
-  image: string;
+  image?: string;
   setCurrentComponent: Dispatch<SetStateAction<string>>;
 }
 
@@ -34,6 +34,7 @@ export default function InvitationBuilder() {
   const [currentComponent, setCurrentComponent] = useState<any>(undefined);
   const [color, setColor] = useState<string>("");
   const [image, setImage] = useState<string>("");
+  const [rotate, setRotate] = useState(0);
   const [components, setComponents] = useState<InfoTypes[]>([
     {
       name: "main_frame",
@@ -100,7 +101,24 @@ export default function InvitationBuilder() {
     console.log("yes we created it");
     const style = {
       id: components.length + 1,
+      name,
+      type,
+      left: 10,
+      top: 10,
+      opacity: 1,
+      width: 200,
+      height: 150,
+      rotate,
+      z_index: 2,
+      color: "#3c3c3d",
+      setCurrentComponent: (a: React.SetStateAction<string>) =>
+        setCurrentComponent(a),
+      removeBackground: () => setImage(""),
+      resizeElement,
+      rotateElement,
     };
+
+    setComponents([...components, style]);
   };
 
   useEffect(() => {
